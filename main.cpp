@@ -23,6 +23,9 @@ int main() {
     heap.pop();
     heap.pop();
     heap.pop();
-    heap.print();
+    // MinHeap::print(heap.getHeap());
+    std::vector<int> v {1,100,20,40,5,1000,994};
+    MinHeap::heapify(v);
+    MinHeap::print(v);
     return 0;
 }

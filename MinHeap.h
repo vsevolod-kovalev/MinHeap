@@ -19,6 +19,9 @@ class MinHeap {
                 }
             }
         }
+        const std::vector<int>& getHeap() const{
+            return heap;
+        }
         void pop() {
             if (heap.size() == 1) {
                 return;
@@ -28,7 +31,8 @@ class MinHeap {
             size_t idx = 1;
             while (idx * 2 < heap.size()) {
                 size_t min_child_idx = idx * 2;
-                if (idx * 2 + 1 < heap.size() && (heap[min_child_idx + 1] < heap[min_child_idx])) {
+                if (idx * 2 + 1 < heap.size() && 
+                    (heap[min_child_idx + 1] < heap[min_child_idx])) {
                     ++min_child_idx;
                 }
                 if (heap[idx] <= heap[min_child_idx]) {
@@ -38,8 +42,32 @@ class MinHeap {
                 idx = min_child_idx;
             }
         }
+        static void heapify(std::vector<int>& l) {
+            if (l.empty()) {
+                return;
+            }
+            l.push_back(l[0]);
+            l[0] = 0;
+            size_t i (l.size() / 2);
+            while (i > 0) {
+                size_t idx (i);
+                while (idx * 2 < l.size()) {
+                    size_t min_child_idx (idx * 2);
+                    if (min_child_idx + 1 < l.size() &&
+                        l[min_child_idx + 1] < l[min_child_idx]) {
+                            ++min_child_idx;
+                        }
+                    if (l[min_child_idx] >= l[idx]) {
+                        break;
+                    }
+                    std::swap(l[min_child_idx], l[idx]);
+                    idx = min_child_idx;
+                }
+                --i;
+            }
+        }
 
-        void print() {
+        static void print(const std::vector<int>& heap) {
             size_t nodes_in_level = 1;
             size_t current_idx = 1;
             size_t current_load = nodes_in_level;
