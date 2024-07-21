@@ -18,6 +18,11 @@ int main() {
     heap.push(100);
     heap.push(94);
     heap.push(1);
+    heap.pop();
+    heap.pop();
+    heap.pop();
+    heap.pop();
+    heap.pop();
     heap.print();
     return 0;
 }
